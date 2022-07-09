@@ -1,0 +1,103 @@
+import {addOrderInfoVideo} from 'backend/creazioneVideoAdClassico'
+import wixLocation from 'wix-location';
+
+var uploadedUrl1;
+var uploadedUrl2;
+var isUploading = false;
+
+export async function uploadButton5_change(event) {
+	isUploading = true
+	console.log("is uploading: " + isUploading);
+	const uploadedFile = await $w('#uploadButton5').startUpload();
+	uploadedUrl1 = uploadedFile.url;
+	console.log(uploadedUrl1);
+	isUploading = false
+	console.log("is uploading: " + isUploading);
+}
+
+export async function uploadButton4_change(event) {
+	isUploading = true
+	console.log("is uploading: " + isUploading);
+	const uploadedFile = await $w('#uploadButton4').startUpload();
+	uploadedUrl2 = uploadedFile.url;
+	console.log(uploadedUrl2);
+	isUploading = false
+	console.log("is uploading: " + isUploading);
+}
+
+export async function button4_click(event) {
+
+	if ($w('#input2').value != "") {
+
+		if (!isUploading) {
+
+			// Rewardful Stuff ---------------------------------------
+
+			// let orderEmail = $w('#input2').value
+			// rewardful('convert', { email:  orderEmail})
+
+			// Rewardful Stuff ---------------------------------------
+
+
+
+			// LinkMink Stuff ----------------------------------------
+
+			// //create a linkmink object with the API key
+			// let lm = LinkMink('pub_live_l0UpegTPhrjZ87soLxwA');
+
+			// //assign the email inputted in the label to a constant
+			// // USED FOR DIRECT CONVERSION
+			// let orderEmail = $w('#input2').value
+			// lm.conversion(orderEmail)
+
+			// //get referal data end send it to the backend
+			// // USED FOR CONVERSION VIA STRIPE
+			// const lmref = lm.getReferalData()
+			// passToBackendReferalDataFunc(lmref)
+
+			// LinkMink Stuff ----------------------------------------
+
+
+			var nuovoOrdine;
+
+			nuovoOrdine = {
+				'fileNecessari1': uploadedUrl1,
+				'fileNecessari2': uploadedUrl2,
+				'puntiDiForza': $w('#textBox1').value,
+				'numeroOrdine': $w('#input2').value,
+				'colori': $w('#textBox2').value,
+				'idea': $w('#textBox3').value,
+				'link': $w('#input3').value,
+				'nomeProdotto': $w('#textBox3DAC315').value,
+				'concorrenza': $w('#textBox3DAC315DAC326').value,
+				'contatti': $w('#input1').value,
+				'dettagliExtra': $w('#textBox4').value,
+				'slider1': $w('#slider1').value,
+				'slider2': $w('#slider2').value,
+				'slider3': $w('#slider3').value,
+				'slider4': $w('#slider4').value,
+				'slider5': $w('#slider5').value,
+				'slider6': $w('#slider6').value,
+				'slider7': $w('#slider7').value,
+				'slider8': $w('#slider8').value,
+				'slider9': $w('#slider9').value,
+				'slider10': $w('#slider10').value,
+				'slider11': $w('#slider11').value,
+				'slider12': $w('#slider12').value,
+				'slider13': $w('#slider13').value
+			};
+
+			addOrderInfoVideo(nuovoOrdine)
+
+			wixLocation.to("/ringraziamenti-video-ads")
+
+		} else {
+			$w('#text133').text = "Perfavore aspetta che i file si siano caricati"
+		}
+
+	} else {
+		let textError = "Inserisci la mail con la quale hai effettuato l'ordine"
+		$w('#text133').text = textError
+		$w('#text133').text.bold()
+	}
+}
