@@ -43,7 +43,7 @@ export async function button4_click(event) {
 			// LinkMink Stuff ----------------------------------------
 
 			// //create a linkmink object with the API key
-			// let lm = LinkMink('pub_live_l0UpegTPhrjZ87soLxwA');
+			// let lm = LinkMink('pub_live_here');
 
 			// //assign the email inputted in the label to a constant
 			// // USED FOR DIRECT CONVERSION
